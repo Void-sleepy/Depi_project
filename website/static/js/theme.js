@@ -2,7 +2,7 @@
   const KEY = "devdocs_theme";
 
   function getPreferred() {
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return "light";
   }
 
   function normalize(theme) {
@@ -32,7 +32,7 @@
     apply(current === "dark" ? "light" : "dark");
   }
 
-  apply(localStorage.getItem(KEY) || getPreferred());
+  apply(getPreferred());
 
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-theme-toggle]");
