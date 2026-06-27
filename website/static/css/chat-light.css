@@ -1,0 +1,41 @@
+/* Chat — light mode: clean white, vivid accents */
+
+html[data-theme="light"] body.chat-page {
+  background-color: #ffffff;
+}
+
+html[data-theme="light"] body.chat-page .sidebar {
+  box-shadow: 1px 0 0 #e8eaf2;
+}
+
+html[data-theme="light"] body.chat-page .input-wrapper:focus-within {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15), 0 4px 16px rgba(79, 70, 229, 0.1);
+}
+
+html[data-theme="light"] body.chat-page .send-btn {
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.35);
+}
+
+html[data-theme="light"] body.chat-page .send-btn:hover:not(:disabled) {
+  box-shadow: 0 4px 18px rgba(79, 70, 229, 0.5);
+}
+
+html[data-theme="light"] body.chat-page .bubble.user {
+  background: rgba(79, 70, 229, 0.1);
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+html[data-theme="light"] body.chat-page .bubble-content code:not(pre code) {
+  background-color: #f4f6ff;
+  color: #4338ca;
+}
+
+html[data-theme="light"] body.chat-page .new-chat-btn:hover {
+  border-color: #4f46e5;
+  background: rgba(79, 70, 229, 0.06);
+}
+
+html[data-theme="light"] body.chat-page .history-row.active {
+  border-left-color: #4f46e5;
+}

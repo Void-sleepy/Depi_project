@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "start api",
+      "type": "shell",
+      "command": "d:/projects/Depi_project/.venv/Scripts/python.exe",
+      "args": ["-m", "uvicorn", "api.main:app", "--reload", "--port", "8000"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "start website",
+      "type": "shell",
+      "command": "d:/projects/Depi_project/.venv/Scripts/python.exe",
+      "args": ["website/app.py"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "start all",
+      "dependsOn": ["start api", "start website"],
+      "dependsOrder": "parallel",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

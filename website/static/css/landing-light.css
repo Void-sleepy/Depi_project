@@ -1,0 +1,59 @@
+/* Landing — light mode: bright, vivid, high energy */
+
+html[data-theme="light"] body.landing-page {
+  background-color: #ffffff;
+}
+
+html[data-theme="light"] body.landing-page .hero::before {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 15%, rgba(79, 70, 229, 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 70%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 35% at 10% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
+}
+
+html[data-theme="light"] body.landing-page .hero-visual-glow {
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.25) 0%, transparent 65%);
+}
+
+html[data-theme="light"] body.landing-page .hero-visual-card {
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.14);
+  border-color: #d4d8e8;
+}
+
+html[data-theme="light"] body.landing-page .hero-cta {
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+}
+
+html[data-theme="light"] body.landing-page .hero-cta:hover {
+  box-shadow: 0 6px 28px rgba(79, 70, 229, 0.55);
+}
+
+html[data-theme="light"] body.landing-page .feature-card {
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.06);
+}
+
+html[data-theme="light"] body.landing-page .feature-card:hover {
+  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.14);
+  border-color: #c7cce8;
+}
+
+html[data-theme="light"] body.landing-page .visual-icon.accent {
+  background: rgba(79, 70, 229, 0.12);
+  border-color: #4f46e5;
+  color: #4f46e5;
+}
+
+html[data-theme="light"] body.landing-page .feature-icon,
+html[data-theme="light"] body.landing-page .step-num,
+html[data-theme="light"] body.landing-page .hero-eyebrow {
+  color: #4f46e5;
+}
+
+html[data-theme="light"] body.landing-page .hero-headline .accent {
+  color: #4f46e5;
+}
+
+html[data-theme="light"] body.landing-page .landing-nav {
+  box-shadow: 0 1px 0 #e8eaf2, 0 4px 24px rgba(79, 70, 229, 0.06);
+}
