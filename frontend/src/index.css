@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "./css/tokens.css";
+@import "./css/landing.css";
+@import "./css/landing-light.css";
+@import "./css/chat.css";
+@import "./css/chat-light.css";
+@import "./css/theme-toggle.css";
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}

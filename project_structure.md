@@ -5,22 +5,20 @@
 ## Current Architecture (As of Today)
 
 The project currently uses a split backend/frontend structure:
-1. **Frontend (`website/`)**: A Flask application serving raw HTML/CSS templates. It uses Alpine.js for interactivity.
-2. **Backend API (`api/`)**: A FastAPI application that will handle the RAG intelligence (retrieval, embeddings, LLM generation).
+1. **Frontend (`frontend/`)**: A modern React application created with Vite, styled using Tailwind CSS v4. It contains the Landing page and Chat UI.
+2. **Backend API (`api/`)**: A FastAPI application that currently mocks the endpoints and will eventually handle the RAG intelligence (retrieval, embeddings, LLM generation).
+3. **Legacy Frontend (`website/`)**: The old Flask/Alpine.js website folder. **DO NOT MODIFY**. This is slated for deletion once the React app is fully verified.
 
-Both are containerized together using `Dockerfile` and orchestrated via `start.sh`.
+## Planned Future Architecture
 
-## Planned Future Architecture (Tomorrow / Soon)
-
-We are planning to transition the stack:
-- **Frontend**: Moving away from Flask + Alpine.js to **React (Vite) + Tailwind CSS** for better performance, developer experience, and modern UI capabilities.
+We are planning to transition the backend stack:
 - **Database**: We plan to introduce a relational database (like **PostgreSQL** or **SQLite**) to handle user authentication, login, and saving chat histories.
 - **Vector Database**: **Qdrant Cloud** will remain the primary database for vector embeddings.
 - **LLM**: We will integrate an LLM via LangChain (to be determined, currently avoiding Ollama by default until a choice is finalized).
 
 ## Directory Guide
 
-Here is what each folder does, and what it *will* do:
+Here is what each folder does:
 
 ```text
 rag-assistant/
@@ -28,13 +26,12 @@ rag-assistant/
 ├── api/                        # Backend API (FastAPI)
 │   └── main.py                 # Exposes /query and /health endpoints. Will connect to src/ later.
 │
-├── website/                    # CURRENT Frontend (Flask) - DEPRECATED SOON
-│   ├── app.py                  # Flask routes
-│   ├── static/                 # CSS/JS files
-│   └── templates/              # HTML files
+├── frontend/                   # CURRENT Frontend (React + Vite + Tailwind CSS)
+│   ├── src/                    # React Components and Pages
+│   ├── package.json            # NPM dependencies
+│   └── vite.config.js          # Vite configuration
 │
-├── frontend/                   # FUTURE Frontend (React + Tailwind)
-│   └── (To be scaffolded)      # Will replace the website/ directory.
+├── website/                    # LEGACY Frontend (Flask) - PENDING DELETION
 │
 ├── src/                        # FUTURE ML/RAG Logic
 │   ├── ingest.py               # Will handle chunking and Qdrant uploads
@@ -52,7 +49,5 @@ rag-assistant/
 
 ### Action Items for Next Session
 1. Delete the old `website/` directory and `WEBSITE_INSTRUCTIONS.md`.
-2. Run `npx create-vite` to scaffold the `frontend/` directory.
-3. Setup Tailwind CSS.
-4. Update `start.sh` to run the React dev server instead of Flask.
-5. Create the database connection for user login.
+2. Update `start.sh` to run the React dev server (`npm run dev` in `frontend/`) instead of Flask.
+3. Create the database connection for user login.
