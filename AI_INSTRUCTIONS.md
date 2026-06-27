@@ -18,10 +18,11 @@ Build a **production-grade, locally-hosted RAG chatbot** for NLP/AI developers. 
 | Language | Python 3.12 |
 | Embedding model | `intfloat/multilingual-e5-base` (HuggingFace) |
 | Vector database | Qdrant Cloud (via `qdrant-client`) |
+| Relational DB | Placeholder (e.g., PostgreSQL for users/login - to be implemented later) |
 | LLM | `llama3:8b-instruct-q4_K_M` via Ollama |
 | RAG orchestration | LangChain |
 | API | FastAPI |
-| Frontend | Single HTML page served by FastAPI (no React, no Streamlit) |
+| Frontend | React (Vite) with Tailwind CSS |
 | Experiment tracking | MLflow (local tracking server) |
 | Evaluation | RAGAS |
 | Containerization | Docker (single image) |
@@ -62,10 +63,15 @@ rag-assistant/
 │   ├── monitor.py              # Script 4: MLflow logging wrapper
 │   └── evaluate.py             # Script 5: RAGAS evaluation script
 │
-├── app/
-│   ├── main.py                 # FastAPI app (API + serves frontend)
-│   └── static/
-│       └── index.html          # Chat UI (single file, no framework)
+├── api/
+│   └── main.py                 # FastAPI app (API Backend)
+│
+├── frontend/                   # React app built with Vite + Tailwind CSS
+│   ├── package.json
+│   ├── index.html
+│   └── src/
+│       ├── App.jsx
+│       └── index.css
 │
 ├── .env                        # env vars (never commit this)
 ├── requirements.txt
@@ -142,10 +148,9 @@ rag-assistant/
 
 ---
 
-## FastAPI App — `app/main.py`
+## FastAPI App — `api/main.py`
 
 **Requirements:**
-- `GET /` → serves `app/static/index.html`
 - `POST /query` → takes `{"question": str}`, returns `{"answer": str, "sources": list[str], "latency_ms": float}`
 - `GET /health` → returns `{"status": "ok", "qdrant": bool, "ollama": bool}` (ping both services)
 - Use `python-dotenv` to load `.env` at startup
@@ -155,20 +160,19 @@ rag-assistant/
 
 ---
 
-## Frontend — `app/static/index.html`
+## Frontend — `frontend/`
 
 **Purpose:** Simple chat interface for the RAG assistant.
 
 **Design requirements:**
-- Single `.html` file — HTML + CSS + JS all in one file, no external dependencies except a Google Font
-- Dark theme — background `#0f1117`, surface cards `#1a1d27`, accent `#7c6af7` (purple)
+- Built using React (Vite) and Tailwind CSS.
+- Dark theme styling using Tailwind utility classes.
 - Font: `JetBrains Mono` for code/terminal feel (load from Google Fonts)
 - Layout: centered chat window, max-width 780px, full height
 - Chat bubbles: user messages right-aligned, assistant messages left-aligned
 - Each assistant message shows collapsible "Sources" section below the answer
 - Input bar pinned to bottom with send button
 - Typing indicator (3 animated dots) while waiting for response
-- On load, show a welcome message: *"Ask me anything about LangChain, HuggingFace, or ChromaDB."*
 - Calls `POST /query` — handle errors gracefully with an inline error message
 - Responsive — must look good on mobile too
 
@@ -252,7 +256,7 @@ When you start a new session with AI, paste this at the top:
 1. `src/ingest.py` → run it to populate Qdrant first
 2. `src/retriever.py`
 3. `src/chain.py`
-4. `app/main.py` + `app/static/index.html`
+4. `api/main.py` + `frontend/` (React App)
 5. `src/monitor.py`
 6. `Dockerfile` + deploy
 7. `src/evaluate.py` (last, only for demo screenshots)

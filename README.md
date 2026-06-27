@@ -1,42 +1,41 @@
 # Customer Support RAG-Powered Intelligent Chatbot
 
-This repository contains the website shell for a RAG assistant UI. The Flask app serves the frontend, and the FastAPI service handles all query intelligence separately.
+This repository contains the backend and frontend shells for a RAG assistant UI. The FastAPI service handles all query intelligence. Currently, the frontend is built with Flask and Alpine.js, but a transition to React (Vite) and Tailwind CSS is planned.
 
-## Layout
+## Architecture
 
-- `website/app.py` - Flask entrypoint (`/` landing, `/chat` chat UI)
-- `website/templates/landing.html` - landing page
-- `website/templates/chat.html` - chat page template
-- `website/static/css/tokens.css` - design tokens
-- `website/static/css/landing.css` - landing page styles
-- `website/static/css/chat.css` - chat UI styles
-- `website/static/js/landing.js` - landing scroll animations
-- `website/static/js/chat.js` - Alpine chat state and API calls
 - `api/main.py` - local FastAPI stub for `/health` and `/query`
-- `requirements.txt` - shared Python dependencies
+- `website/` - Current Flask application serving the UI
+- `frontend/` - (Planned) Future React application
+- `project_structure.md` - Guide to the repository layout and planned changes
+- `requirements.txt` - Python dependencies
 - `.env` - local runtime configuration
+- `Dockerfile` - Containerization instructions
+- `start.sh` - Startup script for the container
+- `AI_INSTRUCTIONS.md` - AI Build Instructions
 
 ## Local setup
 
-1. Create and activate the shared virtual environment.
-2. Install dependencies with `pip install -r requirements.txt`.
-3. Set `FASTAPI_URL=http://localhost:8000` in `.env` if needed.
+1. Create and activate a Python virtual environment.
+2. Install dependencies: `pip install -r requirements.txt`.
+3. Set environment variables in `.env`.
 
-## Run the apps
+### Run the App
 
-Start the FastAPI service first, then start the website.
-
-In VS Code, you can also run the `start all` task from the Tasks menu.
+Start both the backend and frontend by running the startup script, or run them manually:
 
 ```bash
+# Terminal 1: Backend
 uvicorn api.main:app --reload --port 8000
-python website/app.py
+
+# Terminal 2: Frontend
+cd website
+python -m flask --app app run --port 5000
 ```
 
-Open `http://localhost:5000` for the landing page, or `http://localhost:5000/chat` for the chat UI.
+Open `http://localhost:5000` for the UI.
 
 ## Notes
-
 - The website expects the FastAPI service to expose `GET /health` and `POST /query`.
 - A local stub implementation lives in `api/main.py` for development.
-- The UI stores chat sessions in browser localStorage (`devdocs_sessions`).
+- Refer to `project_structure.md` for information on upcoming architectural changes to React and the Database layer.
