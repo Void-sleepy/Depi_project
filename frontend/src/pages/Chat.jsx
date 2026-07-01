@@ -5,6 +5,7 @@ import Messages from '../components/chat/Messages';
 import InputBar from '../components/chat/InputBar';
 
 export default function Chat() {
+  const apiBase = '/api';
   const [messages, setMessages] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [currentSessionId, setCurrentSessionId] = useState(null);
@@ -28,7 +29,7 @@ export default function Chat() {
 
   const checkApi = async () => {
     try {
-      const res = await fetch('http://localhost:8000/health', { signal: AbortSignal.timeout(3000) });
+      const res = await fetch(`${apiBase}/health`, { signal: AbortSignal.timeout(3000) });
       const data = await res.json();
       setApiStatus(data.status === 'ok' ? 'online' : 'degraded');
     } catch {
@@ -108,7 +109,7 @@ export default function Chat() {
     setMessages(updatedMessages);
 
     try {
-      const res = await fetch('http://localhost:8000/query', {
+      const res = await fetch(`${apiBase}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: q })
