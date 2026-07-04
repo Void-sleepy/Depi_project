@@ -18,3 +18,7 @@ htmlcov/
 # Editor and OS noise
 .DS_Store
 Thumbs.db
+
+
+#folders that should be ignored
+vectorDB/

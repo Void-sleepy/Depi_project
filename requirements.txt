@@ -1,5 +1,4 @@
 flask==3.0.3
-
 fastapi==0.111.0
 uvicorn==0.29.0
 python-dotenv==1.0.1
@@ -13,3 +12,6 @@ torch==2.3.0
 mlflow==2.13.2
 ragas==0.1.9
 python-multipart==0.0.9
+langchain-qdrant
+huggingface-hub
+langchain-core
