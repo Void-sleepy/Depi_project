@@ -7,7 +7,7 @@ export default function Messages({ messages, isLoading, messagesEndRef }) {
     <section className="messages">
       {messages.length === 0 && !isLoading && (
         <div className="empty-state">
-          <h1 className="empty-title">DevDocs AI</h1>
+          <h1 className="empty-title">Larperland</h1>
           <p className="empty-tagline">Ask anything about your AI documentation.</p>
         </div>
       )}

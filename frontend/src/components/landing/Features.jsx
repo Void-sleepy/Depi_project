@@ -4,7 +4,7 @@ import { Search, Code, Zap } from 'lucide-react';
 export default function Features() {
   return (
     <section className="features-section" id="features">
-      <p className="section-eyebrow">Why DevDocs AI</p>
+      <p className="section-eyebrow">Why Larperland</p>
       <div className="features-grid">
         <article className="feature-card">
           <div className="feature-icon"><Search /></div>

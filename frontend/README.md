@@ -1,6 +1,6 @@
-# DevDocs AI Frontend
+# Larperland Frontend
 
-This is the frontend for the DevDocs AI RAG Assistant, built using React, Vite, and Tailwind CSS v4.
+This is the frontend for the Larperland RAG Assistant, built using React, Vite, and Tailwind CSS v4.
 
 ## Prerequisites
 

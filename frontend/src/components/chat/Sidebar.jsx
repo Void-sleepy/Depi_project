@@ -14,7 +14,7 @@ export default function Sidebar({ sidebarOpen, groupedSessions, currentSessionId
   return (
     <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <Link to="/" className="sidebar-logo">DevDocs AI</Link>
+        <Link to="/" className="sidebar-logo">Larperland</Link>
         <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="Switch theme">
           <Sun className="w-5 h-5 dark:hidden" />
           <Moon className="w-5 h-5 hidden dark:block" />

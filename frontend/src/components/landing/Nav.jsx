@@ -13,7 +13,7 @@ export default function Nav() {
 
   return (
     <nav className="landing-nav">
-      <Link to="/" className="nav-logo">DevDocs AI</Link>
+      <Link to="/" className="nav-logo">Larperland</Link>
       <div className="nav-actions">
         <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="Switch theme">
           <Sun className="w-5 h-5 dark:hidden" />

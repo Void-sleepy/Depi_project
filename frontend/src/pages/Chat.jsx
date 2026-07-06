@@ -167,7 +167,7 @@ export default function Chat() {
         {/* Mobile Header logic can be embedded here or extracted */}
         <div className="mobile-header">
           <button onClick={() => setSidebarOpen(true)}>☰</button>
-          <span>DevDocs AI</span>
+          <span>Larperland</span>
         </div>
 
         <Messages messages={messages} isLoading={isLoading} messagesEndRef={messagesEndRef} />
