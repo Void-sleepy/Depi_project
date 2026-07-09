@@ -13,15 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all project files
 COPY . .
 
-# Install frontend dependencies
-RUN cd frontend && npm install
+# Install frontend dependencies and build
+RUN cd frontend && npm install && npm run build
 
-# Make the start script executable
-RUN chmod +x start.sh
-
-# Expose API and React ports
+# Expose API port
 EXPOSE 8000
-EXPOSE 5173
 
-# Start both FastAPI and Vite
-ENTRYPOINT ["./start.sh"]
+# Start FastAPI which now serves the built frontend
+ENTRYPOINT ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

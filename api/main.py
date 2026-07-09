@@ -5,6 +5,8 @@ from time import perf_counter
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 # Load environment variables from the root .env file
@@ -15,7 +17,7 @@ app = FastAPI(title="RAG Assistant API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5000", "http://127.0.0.1:5000"],
+    allow_origins=["*"], # Since it's served from same origin, or just keeping it broad for local dev
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,12 +28,12 @@ class QueryRequest(BaseModel):
     question: str
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
-@app.post("/query")
+@app.post("/api/query")
 def query(payload: QueryRequest) -> dict[str, object]:
     start = perf_counter()
     question = payload.question.strip()
@@ -50,7 +52,7 @@ def query(payload: QueryRequest) -> dict[str, object]:
             else:
                 answer = f"Remote API Error (Status {response.status_code}): {response.text}"
         except Exception as e:
-            answer = f"rip"
+            answer = f"Failed to connect to remote AI model"
             
     latency_ms = int((perf_counter() - start) * 1000)
 
@@ -59,3 +61,21 @@ def query(payload: QueryRequest) -> dict[str, object]:
         "sources": [],
         "latency_ms": latency_ms,
     }
+
+# Serve Frontend
+frontend_dist = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
+
+if os.path.exists(os.path.join(frontend_dist, "assets")):
+    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist, "assets")), name="assets")
+
+@app.get("/{catchall:path}")
+def serve_frontend(catchall: str):
+    file_path = os.path.join(frontend_dist, catchall)
+    if os.path.isfile(file_path):
+        return FileResponse(file_path)
+    
+    index_path = os.path.join(frontend_dist, "index.html")
+    if os.path.isfile(index_path):
+        return FileResponse(index_path)
+        
+    return {"error": "Frontend not built yet. Run 'npm run build' in the frontend directory."}
