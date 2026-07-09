@@ -33,7 +33,7 @@ export default function Messages({ messages, isLoading, messagesEndRef }) {
             )}
 
             {msg.role === 'assistant' && msg.latency && (
-              <div className="latency">answered in {msg.latency}ms</div>
+              <div className="latency">answered in {(msg.latency / 1000).toFixed(2)}s</div>
             )}
             
             {msg.role === 'user' && (

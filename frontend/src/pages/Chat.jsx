@@ -1,8 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
+
 import Sidebar from '../components/chat/Sidebar';
 import Messages from '../components/chat/Messages';
 import InputBar from '../components/chat/InputBar';
+
+const renderer = new marked.Renderer();
+renderer.code = function(token) {
+  const lang = (token.lang || 'plaintext').toLowerCase();
+  const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+  let highlighted = token.text;
+  try {
+    highlighted = hljs.highlight(token.text, { language }).value;
+  } catch (e) { }
+
+  return `
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="code-lang">${language}</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent)">Copy</button>
+      </div>
+      <pre><code class="hljs language-${language}">${highlighted}</code></pre>
+    </div>
+  `;
+};
+
+marked.use({ renderer });
 
 export default function Chat() {
   const apiBase = '/api';
