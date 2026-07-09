@@ -1,0 +1,28 @@
+{
+  "name": "depi_project",
+  "version": "1.0.0",
+  "description": "This repository contains the backend and frontend shells for a RAG assistant UI. The frontend is a modern React application built with Vite and Tailwind CSS. The backend is a FastAPI service that handles all query intelligence.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "cd frontend && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Void-sleepy/Depi_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Void-sleepy/Depi_project/issues"
+  },
+  "homepage": "https://github.com/Void-sleepy/Depi_project#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
