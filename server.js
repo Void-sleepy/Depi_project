@@ -54,15 +54,17 @@ app.post('/api/query', async (req, res) => {
             });
         } else {
             const text = await response.text();
+            console.error(`Remote API Error (Status ${response.status}): ${text}`);
             res.json({
-                answer: `Remote API Error (Status ${response.status}): ${text}`,
+                answer: "I'm sorry, my AI backend is currently waking up or experiencing high load. Please try again in a minute!",
                 sources: [],
                 latency_ms: Math.round(performance.now() - start)
             });
         }
     } catch (error) {
+        console.error(`Failed to connect to remote AI model: ${error.message}`);
         res.json({
-            answer: `Failed to connect to remote AI model: ${error.message}`,
+            answer: "I'm having trouble reaching my AI backend right now. Please wait a moment and try again.",
             sources: [],
             latency_ms: Math.round(performance.now() - start)
         });

@@ -155,7 +155,9 @@ export default function Chat() {
       setMessages(finalMessages);
       saveSession(finalMessages, currentSessionId);
     } catch (e) {
-      const errorMsg = { id: crypto.randomUUID(), role: 'assistant', content: `Error: ${e.message}`, html: `<p>Error: ${e.message}</p>` };
+      console.error("Chat Error:", e);
+      const friendlyError = "I'm having trouble connecting to the server. Please check your internet connection and try again.";
+      const errorMsg = { id: crypto.randomUUID(), role: 'assistant', content: friendlyError, html: `<p>${friendlyError}</p>` };
       setMessages([...updatedMessages, errorMsg]);
     } finally {
       setIsLoading(false);
